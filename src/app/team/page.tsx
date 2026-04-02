@@ -247,6 +247,36 @@ export default function TeamPage() {
         </a>
       </Section>
 
+      {/* Team Photos */}
+      <Section>
+        <SectionHeader
+          badge="Our Team"
+          title="Kenalan Dulu"
+          description="The people behind DermaDiff."
+        />
+        <div className="grid gap-6 sm:grid-cols-3">
+          {[
+            { id: "A", name: "Farel Febryan", role: "5025241137", src: "/team/farel.jpg", color: "border-violet-500/40" },
+            { id: "B", name: "Jason Kumarkono", role: "5025241105", src: "/team/jason.jpg", color: "border-orange-500/40" },
+            { id: "C", name: "M. Ilyas Rusdi", role: "Evaluation & Report Lead", src: "/team/ilyas.png", color: "border-teal-500/40" },
+          ].map((member) => (
+            <div key={member.id} className="flex flex-col items-center text-center">
+              <div className={`rounded-2xl border-2 ${member.color} overflow-hidden mb-4`}>
+                <Image
+                  src={member.src}
+                  alt={member.name}
+                  width={400}
+                  height={500}
+                  className="aspect-[4/5] object-cover"
+                />
+              </div>
+              <h3 className="font-semibold text-lg">{member.name}</h3>
+              <p className="text-sm text-muted-foreground">{member.role}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* Timeline Summary */}
       <Section>
         <SectionHeader
@@ -297,6 +327,8 @@ export default function TeamPage() {
           ))}
         </div>
       </Section>
+
+
 
       {/* Key Dependency */}
       <Section className="border-t border-border/40 py-8 sm:py-12">

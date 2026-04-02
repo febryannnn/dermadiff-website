@@ -30,21 +30,21 @@ const experiments = [
   {
     id: "B",
     name: "Stable Diffusion 2.1",
-    data: "Real + SD 2.1 LoRA-generated synthetic images for minority classes",
+    data: "Real image + Stable Diffusion 2.1 LoRA-generated synthetic images for minority classes",
     purpose: "First diffusion variant — classic architecture",
     color: "bg-pink-500/15 text-pink-400 border-pink-400/40",
   },
   {
     id: "C",
     name: "Stable Diffusion XL",
-    data: "Real + SDXL LoRA-generated synthetic images for minority classes",
+    data: "Real image + Stable Diffusion XL LoRA-generated synthetic images for minority classes",
     purpose: "Larger model — does scale improve generation quality?",
     color: "bg-violet-500/15 text-violet-400 border-violet-400/40",
   },
   {
     id: "D",
-    name: "Stable Diffusion 3.5 Medium",
-    data: "Real + SD 3.5 LoRA-generated synthetic images for minority classes",
+    name: "Stable Diffusion 3.5 Large",
+    data: "Real image + Stable Diffusion 3.5 LoRA-generated synthetic images for minority classes",
     purpose: "Latest architecture — flow matching vs diffusion",
     color: "bg-cyan-500/15 text-cyan-400 border-cyan-400/40",
   },
@@ -54,34 +54,27 @@ const pipelineSteps = [
   {
     step: 1,
     what: "Baseline classifier (Exp A)",
-    model: "PanDerm + LoRA",
+    model: "PanDerm ViT",
     output: "Baseline metrics",
     time: "~3 hrs",
   },
   {
     step: 2,
-    what: "Traditional aug classifier (Exp B)",
-    model: "PanDerm + LoRA",
-    output: "Trad. aug. metrics",
-    time: "~4 hrs",
-  },
-  {
-    step: 3,
     what: "Fine-tune diffusion model",
-    model: "SD 2.0 + LoRA",
-    output: "Skin-adapted SD model",
+    model: "Stable Diffusion (SD 2.1, SDXL, and SD 3.5 Large)",
+    output: "Skin-adapted Stable Diffusion model",
     time: "~1-2 days",
   },
   {
-    step: 4,
+    step: 3,
     what: "Generate synthetic minority images",
-    model: "Fine-tuned SD 2.0",
+    model: "Fine-tuned Stable Diffusion Model",
     output: "~10-15K synthetic images",
     time: "~3 hrs",
   },
   {
-    step: 5,
-    what: "Diffusion aug classifier (Exp C)",
+    step: 4,
+    what: "Diffusion aug classifier (Exp B, C, and D)",
     model: "PanDerm + LoRA",
     output: "Diffusion aug. metrics",
     time: "~4 hrs",
@@ -120,7 +113,7 @@ export default function MethodologyPage() {
             Methodology
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            A rigorous three-way experimental design combining latent diffusion
+            A rigorous four-way experimental design combining latent diffusion
             generation with vision foundation model classification.
           </p>
         </div>
@@ -130,10 +123,10 @@ export default function MethodologyPage() {
       <Section>
         <SectionHeader
           badge="Experimental Design"
-          title="Three-Way Comparison"
+          title="Four-Way Experiments"
           description="The core innovation is a three-way comparison that isolates the contribution of diffusion-based augmentation. All three experiments use the exact same PanDerm LoRA configuration, train/val/test split, and evaluation metrics — only the training data differs."
         />
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2">
           {experiments.map((exp) => (
             <Card
               key={exp.id}
@@ -210,7 +203,7 @@ export default function MethodologyPage() {
       <Section className="border-t border-border/40">
         <SectionHeader
           badge="Pipeline Steps"
-          title="5-Step Pipeline Overview"
+          title="4-Step Pipeline Overview"
           description="Sequential pipeline from baseline training through diffusion augmentation, with estimated compute times on A100 GPU."
         />
         <div className="space-y-4">

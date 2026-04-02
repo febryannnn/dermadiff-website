@@ -81,6 +81,8 @@ const recallData = [
   { model: "Exp C4 (SD 3.5 Large)", akiec: "0.7755", bcc: "0.8961", bkl: "0.8485", df: "0.7059", mel: "0.8204", nv: "0.9125", vasc: "0.8636" },
 ];
 
+
+
 const f1Data = [
   { model: "Exp A (Baseline)", akiec: "0.8000", bcc: "0.8589", bkl: "0.7493", df: "0.7407", mel: "0.6879", nv: "0.9385", vasc: "0.9048" },
   { model: "Exp C2 (SD 2.1)", akiec: "0.8125", bcc: "0.8944", bkl: "0.7989", df: "0.7407", mel: "0.6717", nv: "0.9298", vasc: "0.9048" },
