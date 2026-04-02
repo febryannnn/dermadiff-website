@@ -283,7 +283,7 @@ export function AnimatedResultsPage({
         </motion.div>
 
         <p className="text-xs text-white/60 text-center mt-6">
-          Table 4: Four-way comparison results. A = Baseline, C2 = SD 2.1, C3 = SDXL, C4 = SD 3.5.
+          Table 4: Four-way comparison results. A = Baseline, C2 = SD 2.1, C3 = SDXL, C4 = SD 3.5 Large.
         </p>
       </Section>
 
