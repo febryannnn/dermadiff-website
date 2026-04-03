@@ -18,6 +18,7 @@ import { Section, SectionHeader } from "@/components/section";
 import { PipelineAugmentation } from "@/components/pipeline-augmentation";
 import { PipelineFull } from "@/components/pipeline-full";
 import { SDModelArchitectures } from "@/components/pipeline-sd-models";
+import { ClassifierModelArchitectures } from "@/components/pipeline-classifier-models";
 
 const experiments = [
   {
@@ -197,6 +198,16 @@ export default function MethodologyPage() {
           description="Click each model to explore its architecture pipeline. Each generation represents a significant evolution in text-to-image synthesis."
         />
         <SDModelArchitectures />
+      </Section>
+
+      {/* PanDerm Classifier & LoRA */}
+      <Section className="border-t border-border/40">
+        <SectionHeader
+          badge="Classifier & Fine-tuning"
+          title="PanDerm Classifier & LoRA"
+          description="Click each card to explore the architecture. PanDerm is the state-of-the-art dermatology foundation model used for classification, while LoRA enables parameter-efficient fine-tuning across both diffusion and classification models."
+        />
+        <ClassifierModelArchitectures />
       </Section>
 
       {/* Pipeline Steps */}
