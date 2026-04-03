@@ -28,36 +28,36 @@ const recallBarData = CLASSES.map((cls) => ({
   class: cls,
   "Exp A (Baseline)":
     cls === "akiec" ? 0.735 :
-    cls === "bcc" ? 0.909 :
-    cls === "bkl" ? 0.842 :
-    cls === "df" ? 0.588 :
-    cls === "mel" ? 0.713 :
-    cls === "nv" ? 0.917 :
-    0.864,
+      cls === "bcc" ? 0.909 :
+        cls === "bkl" ? 0.842 :
+          cls === "df" ? 0.588 :
+            cls === "mel" ? 0.713 :
+              cls === "nv" ? 0.917 :
+                0.864,
   "Exp C2 (SD 2.1)":
     cls === "akiec" ? 0.796 :
-    cls === "bcc" ? 0.935 :
-    cls === "bkl" ? 0.842 :
-    cls === "df" ? 0.588 :
-    cls === "mel" ? 0.796 :
-    cls === "nv" ? 0.895 :
-    0.864,
+      cls === "bcc" ? 0.935 :
+        cls === "bkl" ? 0.842 :
+          cls === "df" ? 0.588 :
+            cls === "mel" ? 0.796 :
+              cls === "nv" ? 0.895 :
+                0.864,
   "Exp C3 (SDXL)":
     cls === "akiec" ? 0.837 :
-    cls === "bcc" ? 0.870 :
-    cls === "bkl" ? 0.836 :
-    cls === "df" ? 0.706 :
-    cls === "mel" ? 0.790 :
-    cls === "nv" ? 0.915 :
-    0.864,
+      cls === "bcc" ? 0.870 :
+        cls === "bkl" ? 0.836 :
+          cls === "df" ? 0.706 :
+            cls === "mel" ? 0.790 :
+              cls === "nv" ? 0.915 :
+                0.864,
   "Exp C4 (SD 3.5 Large)":
     cls === "akiec" ? 0.776 :
-    cls === "bcc" ? 0.896 :
-    cls === "bkl" ? 0.849 :
-    cls === "df" ? 0.706 :
-    cls === "mel" ? 0.820 :
-    cls === "nv" ? 0.913 :
-    0.864,
+      cls === "bcc" ? 0.896 :
+        cls === "bkl" ? 0.849 :
+          cls === "df" ? 0.706 :
+            cls === "mel" ? 0.820 :
+              cls === "nv" ? 0.913 :
+                0.864,
 }));
 
 // ── Per-Class F1 bar chart data ──
@@ -65,36 +65,36 @@ const f1BarData = CLASSES.map((cls) => ({
   class: cls,
   "Exp A (Baseline)":
     cls === "akiec" ? 0.800 :
-    cls === "bcc" ? 0.859 :
-    cls === "bkl" ? 0.749 :
-    cls === "df" ? 0.741 :
-    cls === "mel" ? 0.688 :
-    cls === "nv" ? 0.938 :
-    0.905,
+      cls === "bcc" ? 0.859 :
+        cls === "bkl" ? 0.749 :
+          cls === "df" ? 0.741 :
+            cls === "mel" ? 0.688 :
+              cls === "nv" ? 0.938 :
+                0.905,
   "Exp C2 (SD 2.1)":
     cls === "akiec" ? 0.812 :
-    cls === "bcc" ? 0.894 :
-    cls === "bkl" ? 0.799 :
-    cls === "df" ? 0.741 :
-    cls === "mel" ? 0.672 :
-    cls === "nv" ? 0.930 :
-    0.905,
+      cls === "bcc" ? 0.894 :
+        cls === "bkl" ? 0.799 :
+          cls === "df" ? 0.741 :
+            cls === "mel" ? 0.672 :
+              cls === "nv" ? 0.930 :
+                0.905,
   "Exp C3 (SDXL)":
     cls === "akiec" ? 0.845 :
-    cls === "bcc" ? 0.882 :
-    cls === "bkl" ? 0.814 :
-    cls === "df" ? 0.800 :
-    cls === "mel" ? 0.679 :
-    cls === "nv" ? 0.940 :
-    0.927,
+      cls === "bcc" ? 0.882 :
+        cls === "bkl" ? 0.814 :
+          cls === "df" ? 0.800 :
+            cls === "mel" ? 0.679 :
+              cls === "nv" ? 0.940 :
+                0.927,
   "Exp C4 (SD 3.5 Large)":
     cls === "akiec" ? 0.844 :
-    cls === "bcc" ? 0.908 :
-    cls === "bkl" ? 0.821 :
-    cls === "df" ? 0.800 :
-    cls === "mel" ? 0.701 :
-    cls === "nv" ? 0.936 :
-    0.927,
+      cls === "bcc" ? 0.908 :
+        cls === "bkl" ? 0.821 :
+          cls === "df" ? 0.800 :
+            cls === "mel" ? 0.701 :
+              cls === "nv" ? 0.936 :
+                0.927,
 }));
 
 // ── Delta heatmap data (recall) ──
@@ -463,7 +463,7 @@ export function ResultsCharts() {
   return (
     <div className="space-y-16">
       {/* 1. Per-Class Bar Charts */}
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-1">
         <motion.div className="bg-card/60 border border-white/10 rounded-xl p-6" {...fadeIn(0)}>
           <PerClassBarChart title="Per-Class Recall Comparison" data={recallBarData} />
         </motion.div>

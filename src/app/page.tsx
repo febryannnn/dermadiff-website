@@ -16,6 +16,7 @@ import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
 import { LesionGrid } from "@/components/lesion-grid";
 import { motion } from "framer-motion";
+import LiquidEther from "@/components/LiquidEther";
 
 const classData = [
   { name: "nv", full: "Melanocytic Nevi", count: 6705, pct: "66.9%", imbalance: "1.0x", risk: "Low" },
@@ -75,6 +76,7 @@ export default function Home() {
         {/* Dermoscopic image grid background */}
         <LesionGrid />
 
+
         <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32 lg:py-40 w-full">
           <div className="mx-auto max-w-3xl text-center">
             <motion.div
@@ -124,10 +126,10 @@ export default function Home() {
                 href="/methodology"
                 className={buttonVariants({ size: "lg", className: "rounded-full px-6" })}
               >
-                Explore Methodology
+                Try Our Model
               </Link>
               <Link
-                href="/results"
+                href="/model"
                 className={buttonVariants({
                   variant: "outline",
                   size: "lg",
