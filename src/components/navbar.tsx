@@ -48,7 +48,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full pt-4">
-      <div className="mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between md:justify-center px-4 sm:px-6">
+
         {/* Desktop nav — pill container */}
         <nav className="hidden md:flex items-center gap-0 rounded-full border border-border/60 bg-muted/50 backdrop-blur-xl p-1.5">
           {mainNavItems.map((item) => (
@@ -122,7 +123,7 @@ export function Navbar() {
               />
             </svg>
           </SheetTrigger>
-          <SheetContent side="right" className="w-72">
+          <SheetContent side="left" className="w-72">
             <nav className="flex flex-col gap-2 mt-8">
               {allNavItems.map((item, i) => (
                 <Link
