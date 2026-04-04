@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import "katex/dist/katex.min.css";
 
 const inter = Inter({
   variable: "--font-sans",
