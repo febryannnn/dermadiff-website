@@ -256,7 +256,7 @@ export default function TeamPage() {
         />
         <div className="grid gap-6 sm:grid-cols-3">
           {[
-            { id: "A", name: "Farel Febryan", role: "5025241137", src: "/team/farel.jpg", color: "border-violet-500/40" },
+            { id: "A", name: "Farel Febryan", role: "5025241137", src: "/team/farel.JPG", color: "border-violet-500/40" },
             { id: "B", name: "Jason Kumarkono", role: "5025241105", src: "/team/jason.jpg", color: "border-orange-500/40" },
             { id: "C", name: "M. Ilyas Rusdi", role: "Evaluation & Report Lead", src: "/team/ilyas.png", color: "border-teal-500/40" },
           ].map((member) => (
