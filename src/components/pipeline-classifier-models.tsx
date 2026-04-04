@@ -2,6 +2,44 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import "katex/dist/katex.min.css";
+import { InlineMath } from "react-katex";
+
+function MathFormulas({ formulas }: { formulas: { label: string; tex: string; note?: string }[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-[720px]">
+      {formulas.map((f, i) => (
+        <div key={i} className="rounded-lg bg-foreground/[0.02] border border-border/20 px-3 py-2.5">
+          <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">{f.label}</p>
+          <div className="text-xs text-foreground/80 leading-relaxed overflow-x-auto">
+            <InlineMath math={f.tex} />
+          </div>
+          {f.note && <p className="text-[10px] text-muted-foreground mt-1">{f.note}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const pandermFormulas = [
+  { label: "Patch Embedding", tex: "z_0 = [x_{\\text{cls}} \\;\\|\\; E \\cdot x_p^1 \\;\\|\\; \\cdots \\;\\|\\; E \\cdot x_p^N] + E_{\\text{pos}}", note: "N = 196 patches, E ∈ ℝ^{(P²·C) × D}" },
+  { label: "Multi-Head Self-Attention", tex: "\\text{MHSA}(Z) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_{16})W^O" },
+  { label: "Attention Head", tex: "\\text{head}_i = \\text{softmax}\\!\\left(\\frac{Q_i K_i^\\top}{\\sqrt{d_k}}\\right) V_i", note: "d_k = 1024/16 = 64" },
+  { label: "Transformer Block", tex: "z'_\\ell = \\text{MHSA}(\\text{LN}(z_{\\ell-1})) + z_{\\ell-1}" },
+  { label: "FFN Sub-layer", tex: "z_\\ell = \\text{FFN}(\\text{LN}(z'_\\ell)) + z'_\\ell", note: "FFN: Linear → GELU → Linear" },
+  { label: "Classification", tex: "\\hat{y} = \\text{softmax}(W_c \\cdot z_L^{\\text{cls}} + b_c)", note: "W_c ∈ ℝ^{7×1024}" },
+  { label: "Cross-Entropy Loss", tex: "\\mathcal{L} = -\\sum_{i=1}^{7} y_i \\log \\hat{y}_i", note: "with weighted sampling for imbalance" },
+  { label: "CAEv2 Pretraining", tex: "\\mathcal{L}_{\\text{CAE}} = \\|\\hat{x}_{\\text{masked}} - x_{\\text{masked}}\\|^2", note: "reconstruct masked patches in latent space" },
+];
+
+const loraFormulas = [
+  { label: "Standard Fine-tuning", tex: "h = (W_0 + \\Delta W)\\, x, \\quad \\Delta W \\in \\mathbb{R}^{d \\times d}", note: "full rank update — d² parameters" },
+  { label: "LoRA Decomposition", tex: "h = W_0 x + \\frac{\\alpha}{r} \\cdot B A x", note: "B ∈ ℝ^{d×r}, A ∈ ℝ^{r×d}, r ≪ d" },
+  { label: "Parameter Count", tex: "\\text{LoRA}: 2dr \\ll d^2 \\quad \\text{(e.g. } \\frac{2 \\times 1024 \\times 16}{1024^2} \\approx 3\\%\\text{)}" },
+  { label: "Initialization", tex: "A \\sim \\mathcal{N}(0, \\sigma^2), \\quad B = 0", note: "ΔW = BA = 0 at start → stable training" },
+  { label: "Effective Weight", tex: "W_{\\text{eff}} = W_0 + \\frac{\\alpha}{r} \\cdot BA", note: "merged at inference — no extra latency" },
+  { label: "Gradient (A only)", tex: "\\frac{\\partial \\mathcal{L}}{\\partial A} = \\frac{\\alpha}{r} \\cdot B^\\top \\frac{\\partial \\mathcal{L}}{\\partial h} x^\\top", note: "W₀ frozen, grad flows through B·A only" },
+];
 
 /* ── Shared SVG helpers (same style as pipeline-sd-models) ── */
 function Box({
@@ -394,6 +432,11 @@ export function ClassifierModelArchitectures() {
                         <p className="text-xs font-medium">{spec.value}</p>
                       </div>
                     ))}
+                  </div>
+                  <div className="flex justify-center">
+                    <MathFormulas formulas={
+                      model.id === "panderm" ? pandermFormulas : loraFormulas
+                    } />
                   </div>
                   <div className="flex justify-center pt-2">
                     <model.Pipeline />

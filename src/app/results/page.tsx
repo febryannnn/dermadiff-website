@@ -16,8 +16,9 @@ import {
 import { Section, SectionHeader } from "@/components/section";
 import { ResultsCharts } from "@/components/results-charts";
 import { AnimatedResultsPage } from "@/components/results-animations";
-
 import { ConfusionMatrixData } from "@/components/confusion-matrix-section";
+// Tambah import di page.tsx
+import { RealVsSynthetic } from "@/components/real-vs-synthetic";
 
 export const confusionMatrices: ConfusionMatrixData[] = [
   {
@@ -196,17 +197,19 @@ const expectedPerformance = [
 
 export default function ResultsPage() {
   return (
-    <AnimatedResultsPage
-          avgData={avgData}
-          recallData={recallData}
-          f1Data={f1Data}
-          expectedPerformance={expectedPerformance}
-          fidPerClass={fidPerClass}
-          isPerClass={isPerClass}
-          lpipsPerClass={lpipsPerClass}
-          pplPerClass={pplPerClass}
-          genOverall={genOverall}
-          confusionMatrices={confusionMatrices}   // ← add this
-        />
+    <>
+      <AnimatedResultsPage
+        avgData={avgData}
+        recallData={recallData}
+        f1Data={f1Data}
+        expectedPerformance={expectedPerformance}
+        fidPerClass={fidPerClass}
+        isPerClass={isPerClass}
+        lpipsPerClass={lpipsPerClass}
+        pplPerClass={pplPerClass}
+        genOverall={genOverall}
+        confusionMatrices={confusionMatrices}
+      />
+    </>
   );
 }

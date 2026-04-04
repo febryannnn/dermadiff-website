@@ -63,7 +63,7 @@ function FloatingCard({
 
   const floatY = depth > 150 ? 6 : depth > 80 ? 10 : 14;
   const floatX = depth > 150 ? 3 : depth > 80 ? 5 : 8;
-  const duration = 16 + depth * 0.04;
+  const duration = 5 + depth * 0.04;
 
   return (
     <motion.div

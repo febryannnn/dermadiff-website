@@ -83,13 +83,13 @@ const pipelineSteps = [
 ];
 
 const generationStrategy = [
-  { cls: "nv", real: 6705, imb: "1.0x", s1: 0, s2: 0, s5: 0, risk: "Low" },
-  { cls: "mel", real: 1113, imb: "6.0x", s1: 1113, s2: 2226, s5: 5565, risk: "Mal." },
-  { cls: "bkl", real: 1099, imb: "6.1x", s1: 1099, s2: 2198, s5: 5495, risk: "Low" },
-  { cls: "bcc", real: 514, imb: "13.0x", s1: 514, s2: 1028, s5: 2570, risk: "Mal." },
-  { cls: "akiec", real: 327, imb: "20.5x", s1: 327, s2: 654, s5: 1635, risk: "Susp." },
-  { cls: "vasc", real: 142, imb: "47.2x", s1: 142, s2: 284, s5: 710, risk: "Low" },
-  { cls: "df", real: 115, imb: "58.3x", s1: 115, s2: 230, s5: 575, risk: "Low" },
+  { cls: "nv", real: 6705, imb: "1.0x", s1: 0, risk: "Low" },
+  { cls: "mel", real: 1113, imb: "6.0x", s1: 1113, risk: "Mal." },
+  { cls: "bkl", real: 1099, imb: "6.1x", s1: 1099, risk: "Low" },
+  { cls: "bcc", real: 514, imb: "13.0x", s1: 514, risk: "Mal." },
+  { cls: "akiec", real: 327, imb: "20.5x", s1: 327, risk: "Susp." },
+  { cls: "vasc", real: 142, imb: "47.2x", s1: 142, risk: "Low" },
+  { cls: "df", real: 115, imb: "58.3x", s1: 115, risk: "Low" },
 ];
 
 function riskBadge(risk: string) {
@@ -264,8 +264,6 @@ export default function MethodologyPage() {
                   <TableHead className="text-right font-semibold">Real</TableHead>
                   <TableHead className="text-right font-semibold">Imbalance</TableHead>
                   <TableHead className="text-right font-semibold">Synth 1x</TableHead>
-                  <TableHead className="text-right font-semibold">Synth 2x</TableHead>
-                  <TableHead className="text-right font-semibold">Synth 5x</TableHead>
                   <TableHead className="text-center font-semibold">Risk</TableHead>
                 </TableRow>
               </TableHeader>
@@ -285,12 +283,6 @@ export default function MethodologyPage() {
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
                       {row.s1.toLocaleString()}
-                    </TableCell>
-                    <TableCell className="text-right font-mono text-sm">
-                      {row.s2.toLocaleString()}
-                    </TableCell>
-                    <TableCell className="text-right font-mono text-sm">
-                      {row.s5.toLocaleString()}
                     </TableCell>
                     <TableCell className="text-center">
                       <Badge
@@ -321,8 +313,8 @@ export default function MethodologyPage() {
             </CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
               <p>
-                <strong className="text-foreground">Stable Diffusion 2.0</strong>{" "}
-                with LoRA fine-tuning (rank 4-8)
+                <strong className="text-foreground">Fine-Tuned Stable Diffusion</strong>{" "}
+                with LoRA (rank 4-8)
               </p>
               <p>DDIM scheduler for deterministic generation</p>
               <p>

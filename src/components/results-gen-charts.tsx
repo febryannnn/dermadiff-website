@@ -271,9 +271,9 @@ function LpipsFidScatter({
 
     if (points.length === 0) return null;
 
-    const W = 520;
+    const W = 400;
     const H = 380;
-    const padL = 65;
+    const padL = 55;
     const padR = 30;
     const padT = 25;
     const padB = 55;

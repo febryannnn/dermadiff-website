@@ -3,6 +3,50 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import "katex/dist/katex.min.css";
+import { InlineMath } from "react-katex";
+
+/* ── Math formulas block ── */
+function MathFormulas({ formulas }: { formulas: { label: string; tex: string; note?: string }[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-[720px]">
+      {formulas.map((f, i) => (
+        <div key={i} className="rounded-lg bg-foreground/[0.02] border border-border/20 px-3 py-2.5">
+          <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">{f.label}</p>
+          <div className="text-xs text-foreground/80 leading-relaxed overflow-x-auto">
+            <InlineMath math={f.tex} />
+          </div>
+          {f.note && <p className="text-[10px] text-muted-foreground mt-1">{f.note}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const sd21Formulas = [
+  { label: "Forward Diffusion", tex: "q(x_t|x_0) = \\sqrt{\\bar{\\alpha}_t}\\, x_0 + \\sqrt{1-\\bar{\\alpha}_t}\\, \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, I)" },
+  { label: "Training Objective", tex: "\\mathcal{L} = \\mathbb{E}_{t,x_0,\\epsilon}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t, t, c)\\|^2\\right]", note: "ε-prediction, noise target" },
+  { label: "DDPM Reverse Step", tex: "x_{t-1} = \\frac{1}{\\sqrt{\\alpha_t}}\\left(x_t - \\frac{\\beta_t}{\\sqrt{1-\\bar{\\alpha}_t}}\\epsilon_\\theta\\right) + \\sigma_t z" },
+  { label: "Classifier-Free Guidance", tex: "\\tilde{\\epsilon} = \\epsilon_\\theta(x_t, \\varnothing) + s \\cdot \\left(\\epsilon_\\theta(x_t, c) - \\epsilon_\\theta(x_t, \\varnothing)\\right)", note: "s = 9.0" },
+  { label: "LoRA Decomposition", tex: "W' = W_0 + \\frac{\\alpha}{r} \\cdot BA, \\quad B \\in \\mathbb{R}^{d \\times r},\\; A \\in \\mathbb{R}^{r \\times k}", note: "r=32, α=64" },
+  { label: "BiomedCLIP Filter", tex: "\\text{score}(x) = \\cos\\big(E_{\\text{img}}(x),\\, E_{\\text{txt}}(p)\\big), \\quad \\text{keep if} > \\mu - 1.5\\sigma" },
+];
+
+const sdxlFormulas = [
+  { label: "Dual Text Conditioning", tex: "c = \\left[\\text{CLIP-L}(p) \\;\\|\\; \\text{CLIP-G}(p)\\right] \\in \\mathbb{R}^{77 \\times 2048}" },
+  { label: "Training Objective", tex: "\\mathcal{L} = \\mathbb{E}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t, t, c, c_{\\text{pooled}})\\|^2\\right]", note: "with pooled CLIP embeddings" },
+  { label: "Micro-Conditioning", tex: "c_{\\text{add}} = (h_{\\text{orig}}, w_{\\text{orig}}, c_y, c_x, h_{\\text{tgt}}, w_{\\text{tgt}})" },
+  { label: "LoRA Injection", tex: "W' = W_0 + \\frac{\\alpha}{r} \\cdot BA, \\quad r=16", note: "applied to UNet cross-attn layers" },
+];
+
+const sd35Formulas = [
+  { label: "Flow Matching ODE", tex: "\\frac{dx}{dt} = v_\\theta(x_t, t, c), \\quad x_t = (1-t)\\,x_0 + t\\,\\epsilon", note: "linear interpolation path" },
+  { label: "Velocity Target", tex: "v = \\epsilon - x_0", note: "velocity prediction, not noise" },
+  { label: "Logit-Normal Timestep", tex: "t \\sim \\sigma\\!\\left(\\mathcal{N}(\\mu, s^2)\\right), \\quad \\mu=0,\\; s=1", note: "biases toward mid-timesteps" },
+  { label: "FM Training Loss", tex: "\\mathcal{L} = \\mathbb{E}_{t, x_0, \\epsilon}\\left[\\|v - v_\\theta(x_t, t, c)\\|^2\\right]" },
+  { label: "Triple Text Encoding", tex: "c = \\left[\\text{CLIP-L} \\oplus \\text{CLIP-G}\\right]_{\\text{pool}} + \\text{T5}(p) \\in \\mathbb{R}^{256 \\times 4096}" },
+  { label: "MMDiT Joint Attention", tex: "\\text{Attn}(Q,K,V), \\quad [Q;K;V] = [\\text{img}_{\\text{tok}} \\;\\|\\; \\text{txt}_{\\text{tok}}]", note: "bidirectional cross-modal attention" },
+];
 
 /* ── Shared SVG helpers ── */
 function Box({
@@ -473,6 +517,13 @@ export function SDModelArchitectures() {
                         <p className="text-xs font-medium">{spec.value}</p>
                       </div>
                     ))}
+                  </div>
+                  <div className="flex justify-center">
+                    <MathFormulas formulas={
+                      model.id === "sd21" ? sd21Formulas :
+                        model.id === "sdxl" ? sdxlFormulas :
+                          sd35Formulas
+                    } />
                   </div>
                   <div className="flex justify-center pt-2">
                     <model.Pipeline />

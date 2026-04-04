@@ -30,7 +30,7 @@ const classData = [
 
 const highlights = [
   {
-    title: "Stable Diffusion 2.0 + LoRA",
+    title: "Fine-Tuned Stable Diffusion for Dermascopy Image with LoRA ",
     description:
       "Fine-tuned latent diffusion model generates high-quality synthetic dermoscopic images for underrepresented classes.",
   },
@@ -40,9 +40,9 @@ const highlights = [
       "State-of-the-art dermatology foundation model (Nature Medicine 2025) serves as the downstream classifier.",
   },
   {
-    title: "Three-Way Comparison",
+    title: "Four-Way Comparison",
     description:
-      "Rigorous experimental design comparing no augmentation, traditional augmentation, and our diffusion-based method.",
+      "Rigorous experimental design comparing no augmentation, Stable Diffusion 2.1 Base, Stable Diffusion XL, and Stable Diffusion 3.5 Large.",
   },
 ];
 
@@ -52,6 +52,8 @@ function riskColor(risk: string) {
       return "bg-red-500/10 text-red-400 border-red-500/20";
     case "Suspicious":
       return "bg-amber-500/10 text-amber-400 border-amber-500/20";
+    case "Low":
+      return "bg-green-500/10 text-green-400 border-green-500/20";
     default:
       return "bg-neutral-500/10 text-neutral-400 border-neutral-500/20";
   }
@@ -156,8 +158,8 @@ export default function Home() {
             <CardContent className="pt-6">
               <p className="text-muted-foreground leading-relaxed">
                 Skin lesion classification using deep learning suffers from
-                severe class imbalance in standard benchmarks: in HAM10000,
-                melanoma is{" "}
+                severe class imbalance in standard benchmarks: in HAM10000
+                (Tschandl et al., 2018; Alam et al., 2022), melanoma is{" "}
                 <strong className="text-foreground">
                   6x underrepresented
                 </strong>{" "}
@@ -171,45 +173,15 @@ export default function Home() {
                   Stable Diffusion 2.0 fine-tuned with LoRA
                 </strong>{" "}
                 to generate high-quality dermoscopic images specifically for rare
-                malignant and pre-cancerous classes.{" "}
-                <strong className="text-foreground">PanDerm</strong> (Nature
-                Medicine 2025), the state-of-the-art dermatology foundation
-                model, serves as our classifier.
+                malignant and pre-cancerous classes, building upon prior work in
+                generative augmentation (Alsaidi et al., 2023; SkinGenBench, 2025).{" "}
+                <strong className="text-foreground">PanDerm</strong>{" "}
+                (Nature Medicine, 2025), the state-of-the-art dermatology
+                foundation model, serves as our classifier.
               </p>
             </CardContent>
           </Card>
         </motion.div>
-      </Section>
-
-      {/* Key Components */}
-      <Section className="border-t border-border/40">
-        <SectionHeader
-          badge="Key Components"
-          title="What Makes DermaDiff Different"
-          description="Combining state-of-the-art generative and classification models with a rigorous experimental design."
-        />
-        <div className="grid gap-6 sm:grid-cols-3">
-          {highlights.map((h, i) => (
-            <motion.div
-              key={h.title}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-            >
-              <SpotlightCard
-                className="h-full !bg-card/50 !border-border/50"
-                spotlightColor="rgba(255, 255, 255, 0.06)"
-              >
-                <h3 className="text-base font-semibold mb-2">{h.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {h.description}
-                </p>
-              </SpotlightCard>
-            </motion.div>
-          ))}
-        </div>
       </Section>
 
       {/* The Problem - with lesion image gallery */}
@@ -300,6 +272,39 @@ export default function Home() {
           ))}
         </div>
       </Section>
+
+      {/* Key Components */}
+      <Section className="border-t border-border/40">
+        <SectionHeader
+          badge="Key Components"
+          title="What Makes DermaDiff Different"
+          description="Combining state-of-the-art generative and classification models with a rigorous experimental design."
+        />
+        <div className="grid gap-6 sm:grid-cols-3">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={h.title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <SpotlightCard
+                className="h-full !bg-card/50 !border-border/50"
+                spotlightColor="rgba(255, 255, 255, 0.06)"
+              >
+                <h3 className="text-base font-semibold mb-2">{h.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {h.description}
+                </p>
+              </SpotlightCard>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+
 
       {/* Research Objectives */}
       <Section className="border-t border-border/40">

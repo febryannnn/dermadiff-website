@@ -1,43 +1,44 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Section, SectionHeader } from "@/components/section";
+import Image from "next/image";
 
 const references = [
   {
     id: 1,
     authors: "Yan, S. et al.",
-    title:
-      "A multimodal vision foundation model for clinical dermatology.",
+    title: "A multimodal vision foundation model for clinical dermatology.",
     venue: "Nature Medicine",
     year: 2025,
     tag: "Classification",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 2,
     authors: "SkinDualGen",
-    title:
-      "Prompt-Driven Diffusion for Simultaneous Image-Mask Generation in Skin Lesions.",
+    title: "Prompt-Driven Diffusion for Simultaneous Image-Mask Generation in Skin Lesions.",
     venue: "arXiv:2507.19970",
     year: 2025,
     tag: "Generation",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 3,
     authors: "Fayyad, J. et al.",
-    title:
-      "LesionGen: A Concept-Guided Diffusion Model for Dermatology Image Synthesis.",
+    title: "LesionGen: A Concept-Guided Diffusion Model for Dermatology Image Synthesis.",
     venue: "MICCAI",
     year: 2025,
     tag: "Generation",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 4,
     authors: "Kim, M. et al.",
-    title:
-      "Diffusion-based skin disease data augmentation with fine-grained detail preservation.",
+    title: "Diffusion-based skin disease data augmentation with fine-grained detail preservation.",
     venue: "PLOS One",
     year: 2025,
     tag: "Augmentation",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 5,
@@ -46,6 +47,7 @@ const references = [
     venue: "Neurocomputing 321",
     year: 2018,
     tag: "Augmentation",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 6,
@@ -54,15 +56,16 @@ const references = [
     venue: "Scientific Data 5: 180161",
     year: 2018,
     tag: "Dataset",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 7,
     authors: "Rombach, R. et al.",
-    title:
-      "High-Resolution Image Synthesis with Latent Diffusion Models.",
+    title: "High-Resolution Image Synthesis with Latent Diffusion Models.",
     venue: "CVPR",
     year: 2022,
     tag: "Diffusion",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 8,
@@ -71,6 +74,7 @@ const references = [
     venue: "ICLR",
     year: 2022,
     tag: "LoRA",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 9,
@@ -79,6 +83,7 @@ const references = [
     venue: "arXiv:1902.03368",
     year: 2019,
     tag: "Dataset",
+    thumbnail: "/papers/panderm.png",
   },
   {
     id: 10,
@@ -87,6 +92,7 @@ const references = [
     venue: "Scientific Data 11: 641",
     year: 2024,
     tag: "Dataset",
+    thumbnail: "/papers/panderm.png",
   },
 ];
 
@@ -133,7 +139,7 @@ export default function ReferencesPage() {
               key={ref.id}
               className="bg-card/50 border-border/50 hover:border-primary/30 transition-colors"
             >
-              <CardContent className="flex items-start gap-4 py-5">
+              <CardContent className="flex items-center gap-4 py-5">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">
                   {ref.id}
                 </span>
@@ -152,6 +158,17 @@ export default function ReferencesPage() {
                       {ref.tag}
                     </Badge>
                   </div>
+                </div>
+
+                {/* Paper thumbnail — landscape, right side */}
+                <div className="relative h-14 w-24 shrink-0 overflow-hidden rounded-md border border-border/50 bg-muted/30">
+                  <Image
+                    src={ref.thumbnail}
+                    alt={`${ref.authors} paper`}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
                 </div>
               </CardContent>
             </Card>
